@@ -1,4 +1,25 @@
-;nie funkcjonuje jako samodzielny program ale raczej jako biblioteka
+clrscr:
+	mov ax, 0a000h
+	mov es, ax
+	mov di, 0
+	mov cx, 57600
+	
+	black_fill:	
+		mov byte ptr es:[di], 3
+		inc di
+	loop black_fill
+ret
+
+set_graphical_mode:
+	mov ax,0013h
+	int 10h
+ret
+
+set_text_mode:
+	mov ax, 3
+	int 10h         
+ret
+
 set_colors:
 	mov ax, 13h
 	int 10h
@@ -49,17 +70,17 @@ set_colors:
 			call set_rgb_color
 	loop set_gray_colors
 
-ret                     ;wyjscie z podprogramu
+ret
 
 set_rgb_color:
-	xchg ah,al              ;teraz al=numer koloru  ah=skladowa R
-	mov dx,3c8h
-	out dx,al               ;nr koloru
+	xchg ah, al              ;teraz al=numer koloru  ah=skladowa R
+	mov dx, 3c8h
+	out dx, al               ;nr koloru
 	inc dx
-	mov al,ah              ;R
-	out dx,al
-	mov al,bh              ;G
-	out dx,al
-	mov al,bl               ;B
-	out dx,al
+	mov al, ah              ;R
+	out dx, al
+	mov al, bh              ;G
+	out dx, al
+	mov al, bl               ;B
+	out dx, al
 ret
