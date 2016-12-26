@@ -24,11 +24,6 @@ hide_menu:
 	rep stosb
 ret
 
-exit_menu:
-	call hide_menu
-	jmp draw
-
-
 on_keypressed:
 	call show_menu
 	mov ah, 8
@@ -82,3 +77,9 @@ on_keypressed:
 	cmp al, 'c'
 	jne exit_menu
 	call clrscr
+
+exit_menu:
+	call hide_menu
+jmp draw
+	
+menu_content db "1red 2blu 3blk 4wht 5pur 6grn 7yel 8tur 9gray s-save l-load c-clear ESC-exit$"

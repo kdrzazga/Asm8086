@@ -9,7 +9,7 @@ error:
 	lea dx, error_message
 	mov ah, 9
 	int 21h
-	jmp exit_menu
+jmp exit_menu
 
 save_drawing:
 

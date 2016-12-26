@@ -46,7 +46,6 @@ include graph.asm
 include mouse.asm
 include io.asm
 
-menu_content db "1red 2blu 3blk 4wht 5pur 6grn 7yel 8tur 9gray s-save l-load c-clear ESC-exit$"
 CODE ENDS
 
 END main
