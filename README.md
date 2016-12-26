@@ -1,7 +1,10 @@
 # Asm8086
 Old programs
+
 Compiling:
+
 tasm.exe kdpaint.asm
+
 tlink.exe kdpaint.obj
 
 TASM and TLINK are part of TASM 5 Intel 8086 Turbo Assembler.
