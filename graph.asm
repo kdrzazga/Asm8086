@@ -20,7 +20,7 @@ set_text_mode:
 	int 10h         
 ret
 
-set_colors:
+init_colors:
 	mov ax, 13h
 	int 10h
 
@@ -60,7 +60,6 @@ set_colors:
 	mov bx, 0a0a0h
 	call set_rgb_color
 
-	;reszte kolorow ustawiam na odcienie szarosci
 	mov cx, 244
 	mov ax, 0ffffh
 	mov bx, 0ffffh
@@ -73,7 +72,7 @@ set_colors:
 ret
 
 set_rgb_color:
-	xchg ah, al              ;teraz al=numer koloru  ah=skladowa R
+	xchg ah, al              ;after this al contains color index  ah= R value
 	mov dx, 3c8h
 	out dx, al               ;nr koloru
 	inc dx
