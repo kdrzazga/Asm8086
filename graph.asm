@@ -1,3 +1,13 @@
+set_graphical_mode:
+	mov ax,0013h
+	int 10h
+ret
+
+set_text_mode:
+	mov ax, 3
+	int 10h         
+ret
+
 clrscr:
 	mov ax, 0a000h
 	mov es, ax
@@ -8,16 +18,6 @@ clrscr:
 		mov byte ptr es:[di], 3
 		inc di
 	loop black_fill
-ret
-
-set_graphical_mode:
-	mov ax,0013h
-	int 10h
-ret
-
-set_text_mode:
-	mov ax, 3
-	int 10h         
 ret
 
 init_colors:
@@ -32,31 +32,31 @@ init_colors:
 	mov bx, 02ffh           
 	call set_rgb_color
 
-	mov ax, 0300h            ;3 kolor-czarny
+	mov ax, 0300h            ;3 black
 	mov bx, 0
 	call set_rgb_color
 
 	mov ax, 04ffh
-	mov bx, 0ffffh           ;4 kolor-bialy
+	mov bx, 0ffffh           ;4 white
 	call set_rgb_color
 
 	mov ax, 05ffh
-	mov bx, 0ffh           ;5 kolor-fiolet
+	mov bx, 0ffh           ;5 magenta
 	call set_rgb_color
 
 	mov ax, 0600h
-	mov bx, 0ff00h           ;6 kolor-zielony
+	mov bx, 0ff00h           ;6 light green
 	call set_rgb_color
 
 	mov ax, 07ffh
-	mov bx, 0ff00h           ;7 kolor-zolty
+	mov bx, 0ff00h           ;7 yellow
 	call set_rgb_color
 
 	mov ax, 0800h
-	mov bx, 0ffffh           ;8 kolor-turkus
+	mov bx, 0ffffh           ;8 cyan
 	call set_rgb_color
 
-	mov ax, 09a0h            ;9 kolor-szary
+	mov ax, 09a0h            ;9 gray
 	mov bx, 0a0a0h
 	call set_rgb_color
 
@@ -65,9 +65,9 @@ init_colors:
 	mov bx, 0ffffh
 	
 	set_gray_colors:
-			dec ax
-			dec bx
-			call set_rgb_color
+		dec ax
+		dec bx
+		call set_rgb_color
 	loop set_gray_colors
 
 ret
@@ -75,7 +75,7 @@ ret
 set_rgb_color:
 	xchg ah, al              ;after this al contains color index  ah= R value
 	mov dx, 3c8h
-	out dx, al               ;nr koloru
+	out dx, al               ;color index
 	inc dx
 	mov al, ah              ;R
 	out dx, al

@@ -21,3 +21,21 @@ set_mouse_movement_speed:
 	mov dx, 50                       ;vertical speed
 	int 33h
 ret
+
+on_left_mouse_click:
+	push bx
+	mov ax, dx
+	mov bx, 320
+	mul bx
+	shr cx, 1
+	add ax, cx
+	mov di, ax
+	sub di, 321
+	mov bl, current_color
+	mov es:[di], bl
+	pop bx
+jmp main_draw_loop
+
+on_right_mouse_click:
+	call show_menu
+jmp get_menu_option	
