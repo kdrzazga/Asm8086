@@ -16,14 +16,12 @@ main:
 		mov es, dx
 		mov ax, 3
 		int 33h
-		test bx, 1
-		;jz dont_draw_point
 		
+		test bx, 1
 		jnz on_left_mouse_click
 		
-		dont_draw_point:
-			test bx, 2
-			jnz on_right_mouse_click
+		test bx, 2
+		jnz on_right_mouse_click
 		
 	jmp main_draw_loop
 
