@@ -1,6 +1,6 @@
 io_load_drawing:
-	call open_file
-	call read_from_file
+	call io_open_file
+	call io_read_from_file
 ret
 
 io_error:
@@ -29,12 +29,12 @@ io_save_drawing:
 		inc di
 		loop copy_memory
 
-	call create_file
-	call write_to_file
+	call io_create_file
+	call io_write_to_file
 
 ret
 
-create_file:
+io_create_file:
 	mov ah, 3ch
 	mov dx, seg file_name
 	mov ds, dx
@@ -44,7 +44,7 @@ create_file:
 	jc io_error
 ret
 
-write_to_file:
+io_write_to_file:
 	xchg bx, ax               ;teraz bx zawiera uchwyt fileu
 	mov ah, 40h
 	mov dx, seg PICBUFFER
@@ -56,7 +56,7 @@ write_to_file:
 	jc io_error
 ret
 
-open_file:
+io_open_file:
 	mov ah, 3dh              ;otwarcie fileu
 	mov dx, seg file_name
 	mov ds, dx
@@ -66,7 +66,7 @@ open_file:
 	jc io_error
 ret
 
-read_from_file:
+io_read_from_file:
 	mov bx, ax               ;uchwyt do bx
 	mov ah, 3fh              ;odczyt z fileu
 	mov cx, 57600            ;tylu bajtow
