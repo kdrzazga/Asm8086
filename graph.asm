@@ -63,6 +63,7 @@ init_colors:
 	mov cx, 244
 	mov ax, 0ffffh
 	mov bx, 0ffffh
+	
 	set_gray_colors:
 			dec ax
 			dec bx

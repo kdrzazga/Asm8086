@@ -24,7 +24,7 @@ hide_menu:
 	rep stosb
 ret
 
-on_keypressed:
+on_right_mouse_click:
 	call show_menu
 	mov ah, 8
 	int 21h
@@ -68,11 +68,11 @@ on_keypressed:
 	s:
 	cmp al, 's'
 	jne l
-	call save_drawing
+	call io_save_drawing
 	l:
 	cmp al, 'l'
 	jne c
-	call load_drawing
+	call io_load_drawing
 	c:
 	cmp al, 'c'
 	jne exit_menu

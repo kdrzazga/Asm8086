@@ -32,7 +32,7 @@ draw:
 
 	no_point:
 		test bx, 2
-		jnz on_keypressed
+		jnz on_right_mouse_click
 	
 jmp draw
 

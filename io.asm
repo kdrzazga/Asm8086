@@ -1,17 +1,17 @@
-load_drawing:
+io_load_drawing:
 	call open_file
 	call read_from_file
 ret
 
-error:
-	mov dx, seg error_message
+io_error:
+	mov dx, seg io_error_message
 	mov ds, dx
-	lea dx, error_message
+	lea dx, io_error_message
 	mov ah, 9
 	int 21h
 jmp exit_menu
 
-save_drawing:
+io_save_drawing:
 
 	call hide_mouse
 
@@ -41,7 +41,7 @@ create_file:
 	lea dx, file_name
 	mov cx, 0
 	int 21h
-	jc error
+	jc io_error
 ret
 
 write_to_file:
@@ -53,7 +53,7 @@ write_to_file:
 	mov cx, 57600            ;ilosc bajtow do zapisu
 	int 21h
 	call show_mouse
-	jc error
+	jc io_error
 ret
 
 open_file:
@@ -63,7 +63,7 @@ open_file:
 	lea dx, file_name
 	mov al, 0
 	int 21h
-	jc error
+	jc io_error
 ret
 
 read_from_file:
@@ -74,8 +74,8 @@ read_from_file:
 	mov ds, dx
 	mov dx, 0
 	int 21h
-	jc error
+	jc io_error
 ret
 
 file_name db "grafika.nfg", 0
-error_message db "IO error$"
+io_error_message db "IO error$"
