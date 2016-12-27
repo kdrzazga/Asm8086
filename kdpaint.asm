@@ -25,15 +25,15 @@ main:
 		
 	jmp main_draw_loop
 
-	exit:
-		call set_text_mode
-	mov ax, 4c01h
-	int 21h
-
 	include mouse.asm
 	include menu.asm
 	include graph.asm
 	include io.asm
+
+	exit:
+		call set_text_mode
+	mov ax, 4c01h
+	int 21h
 
 	CODE ENDS
 

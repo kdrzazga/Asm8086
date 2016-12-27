@@ -30,9 +30,7 @@ get_menu_option:
 	int 21h
 	cmp al, 27		;ESC
 	jne k1
-	call set_text_mode
-	mov ax, 4c01h
-	int 21h
+	jmp exit
 	
 	k1:
 		cmp al, '1'                      
