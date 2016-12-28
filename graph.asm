@@ -1,25 +1,30 @@
+;public
 set_graphical_mode:
 	mov ax,0013h
 	int 10h
 ret
 
+;public
 set_text_mode:
 	mov ax, 3
 	int 10h         
 ret
 
+;private
 clrscr:
 	mov ax, 0a000h
 	mov es, ax
 	mov di, 0
 	mov cx, 57600
 	
+	;private
 	black_fill:	
 		mov byte ptr es:[di], 3
 		inc di
 	loop black_fill
 ret
 
+;public
 init_colors:
 	mov ax, 13h
 	int 10h
@@ -64,6 +69,7 @@ init_colors:
 	mov ax, 0ffffh
 	mov bx, 0ffffh
 	
+	;private
 	set_gray_colors:
 		dec ax
 		dec bx
@@ -72,6 +78,7 @@ init_colors:
 
 ret
 
+;private
 set_rgb_color:
 	xchg ah, al              ;after this al contains color index  ah= R value
 	mov dx, 3c8h

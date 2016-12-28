@@ -1,8 +1,10 @@
+;public
 io_load_drawing:
 	call io_open_file
 	call io_read_from_file
 ret
 
+;private
 io_error:
 	mov dx, seg io_error_message
 	mov ds, dx
@@ -11,6 +13,7 @@ io_error:
 	int 21h
 jmp exit_menu
 
+;public
 io_save_drawing:
 
 	call hide_mouse
@@ -23,6 +26,7 @@ io_save_drawing:
 	mov di, 0
 	mov cx, 57600
 	
+	;private
 	copy_memory:
 		mov bl, es:[di]
 		mov ds:[di], bl
@@ -31,9 +35,9 @@ io_save_drawing:
 
 	call io_create_file
 	call io_write_to_file
-
 ret
 
+;private
 io_create_file:
 	mov ah, 3ch
 	mov dx, seg file_name
@@ -44,20 +48,22 @@ io_create_file:
 	jc io_error
 ret
 
+;private
 io_write_to_file:
-	xchg bx, ax               ;teraz bx zawiera uchwyt fileu
+	xchg bx, ax               ;bx = handle to file
 	mov ah, 40h
 	mov dx, seg PICBUFFER
 	mov ds, dx
 	lea dx, PICBUFFER
-	mov cx, 57600            ;ilosc bajtow do zapisu
+	mov cx, 57600
 	int 21h
 	call show_mouse
 	jc io_error
 ret
 
+;private
 io_open_file:
-	mov ah, 3dh              ;otwarcie fileu
+	mov ah, 3dh
 	mov dx, seg file_name
 	mov ds, dx
 	lea dx, file_name
@@ -66,10 +72,11 @@ io_open_file:
 	jc io_error
 ret
 
+;private
 io_read_from_file:
-	mov bx, ax               ;uchwyt do bx
-	mov ah, 3fh              ;odczyt z fileu
-	mov cx, 57600            ;tylu bajtow
+	mov bx, ax
+	mov ah, 3fh
+	mov cx, 57600
 	mov dx, 0a000h
 	mov ds, dx
 	mov dx, 0
